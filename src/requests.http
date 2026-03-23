@@ -1,0 +1,77 @@
+### Create Spotify yearly
+POST http://localhost:8080/subscriptions
+Content-Type: application/json
+
+{
+  "name": "Spotify",
+  "price": 4050,
+  "currency": "RUB",
+  "billingPeriod": "YEARLY",
+  "startDate": "2026-01-10",
+  "category": "MUSIC",
+  "status": "ACTIVE",
+  "description": "Indian subscription from Lena"
+}
+
+### Create Yandex Plus monthly
+POST http://localhost:8080/subscriptions
+Content-Type: application/json
+
+{
+  "name": "Yandex Plus",
+  "price": 399,
+  "currency": "RUB",
+  "billingPeriod": "MONTHLY",
+  "startDate": "2026-03-25",
+  "category": "ENTERTAINMENT",
+  "status": "ACTIVE",
+  "description": "Monthly subscription"
+}
+
+### Create canceled subscription
+POST http://localhost:8080/subscriptions
+Content-Type: application/json
+
+{
+  "name": "Netflix",
+  "price": 999,
+  "currency": "RUB",
+  "billingPeriod": "MONTHLY",
+  "startDate": "2025-11-01",
+  "category": "ENTERTAINMENT",
+  "status": "CANCELED",
+  "description": "Canceled by user"
+}
+
+### Create nonvalid subscription
+POST http://localhost:8080/subscriptions
+Content-Type: application/json
+
+{
+"name": "",
+"price": -100
+}
+
+### Nonvalid id
+GET http://localhost:8080/subscriptions/999
+
+### Get all
+GET http://localhost:8080/subscriptions
+
+### Get by id
+GET http://localhost:8080/subscriptions/1
+
+### Get active
+GET http://localhost:8080/subscriptions/active
+
+### Get upcoming in 7 days
+GET http://localhost:8080/subscriptions/upcoming?days=7
+
+### Get monthly cost
+GET http://localhost:8080/subscriptions/summary/monthly-cost
+
+### Delete by id
+DELETE http://localhost:8080/subscriptions/1
+
+### Change subscription status
+PATCH http://localhost:8080/subscriptions/2/status?status=CANCELED
