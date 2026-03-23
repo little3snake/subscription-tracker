@@ -39,9 +39,9 @@ The project allows users to:
 - [Architecture](#architecture)
 - [Domain model](#domain-model)
 - [API](#api)
-- [Example requests](#example-requests)
+- [Example request](#example-request)
 - [Validation and error handling](#validation-and-error-handling)
-- [How to run locally](#how-to-run-locally)
+- [Run locally](#run-locally)
 - [Project structure](#project-structure)
 - [Future improvements](#future-improvements)
 
@@ -125,6 +125,20 @@ Client -> Controller -> Service -> Repository -> Database
 - Service — business logic
 - Repository — database access
 
+## Domain model
+
+The main entity is `Subscription`, which contains:
+
+- name
+- price
+- currency
+- billing period
+- start date
+- category
+- status
+
+`nextPaymentDate` is calculated dynamically.
+
 
 
 ## API
@@ -145,22 +159,7 @@ GET /subscriptions/summary/monthly-cost
 PATCH /subscriptions/{id}/status?status=CANCELED
 ### Delete
 DELETE /subscriptions/{id}
-## Example request
-```text
-POST http://localhost:8080/subscriptions
-Content-Type: application/json
 
-{
-  "name": "Spotify",
-  "price": 4050,
-  "currency": "RUB",
-  "billingPeriod": "YEARLY",
-  "startDate": "2026-01-10",
-  "category": "MUSIC",
-  "status": "ACTIVE",
-  "description": "blablabla"
-}
-```
 
 ## Example request
 ```text
@@ -194,14 +193,87 @@ POST /subscriptions
 }
 ```
 
+## Validation and error handling
+
+Example validation error:
+
+```json
+{
+  "error": "Validation failed",
+  "details": [
+    "Name must not be blank",
+    "Price must be greater than 0"
+  ]
+}
+```
+
+Example not found error:
+
+```json
+{
+  "error": "Subscription not found with id: 999",
+  "details": null
+}
+```
+
+---
 
 ## Run locally
 
-git clone https://github.com/little3snake/subscription-tracker.git
+### 1. Clone repository
 
+```bash
+git clone https://github.com/YOUR_USERNAME/subscription-tracker.git
+cd subscription-tracker
+```
+
+### 2. Create database
+
+```sql
 CREATE DATABASE subscription_tracker;
+```
 
+### 3. Configure `application.properties`
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/subscription_tracker
+spring.datasource.username=postgres
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+server.port=8080
+```
+
+### 4. Run application
+
+```bash
 mvn spring-boot:run
+```
+
+
+## Project structure
+
+```text
+controller/
+service/
+repository/
+entity/
+dto/
+exception/
+```
+
+
+## Future improvements
+
+- Swagger / OpenAPI
+- Docker
+- Authentication
+- Filtering
+- Tests
+- Frontend
+
 
 
 ## Author
