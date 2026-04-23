@@ -17,16 +17,15 @@
 
 ## Overview
 
-**Subscription Tracker** is a REST API for managing subscriptions and analyzing recurring expenses.
+**Subscription Tracker** is a REST API for managing user subscriptions and calculating recurring expenses.
 
-The project allows users to:
+It allows clients to:
 
-- store subscriptions
-- manage subscription lifecycle
-- calculate monthly recurring costs
-- see upcoming payments
-- validate request data
-- receive structured error responses
+ - manage subscription lifecycle (create, update, deactivate)
+ - track upcoming payments based on billing periods
+ - calculate aggregated monthly costs
+
+The project focuses on backend design, including domain modeling, business logic for recurring payments, and clean architecture.
 
 
 
@@ -49,16 +48,7 @@ The project allows users to:
 
 ## Why this project
 
-This project was created as a pet project to practice backend development with a realistic domain model.
-
-It focuses on:
-
-- REST API design
-- layered architecture
-- Spring Boot + PostgreSQL integration
-- validation
-- exception handling
-- business logic for recurring payments
+Designed as a backend-focused project with a realistic domain model and recurring payments logic.
 
 
 
@@ -85,16 +75,12 @@ Instead, this project calculates the next payment date on the fly, which makes t
 
 ## Features
 
-- Create subscriptions
-- Get all subscriptions
-- Get subscription by id
-- Get only active subscriptions
-- Get upcoming payments for the next *N* days
-- Calculate monthly recurring cost
-- Update subscription status
-- Delete subscriptions
-- Validate incoming data
-- Return structured JSON errors
+ - manage subscription lifecycle (CRUD operations)
+ - track upcoming payments for a given time window
+ - calculate monthly recurring expenses
+ - filter subscriptions (active / upcoming)
+ - validate incoming request data
+ - return structured JSON error responses
 
 
 
